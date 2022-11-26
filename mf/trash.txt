@@ -1,0 +1,19 @@
+
+char ALL_header[] = "[ALL header]";
+#define ALL_BUF 64
+#define ALL_MF 52
+#define ALL_HL 12
+int ALL_send(char *message, int len){
+    char buf[ALL_BUF];
+    int send_len, ret;
+    while (len) {
+        send_len = min(ALL_MF, len);
+        strcpy(buf, ALL_header, ALL_HL);
+        strcpy(buf+ALL_HL, message, send_len);
+        if(ret = pl_send(buf, ALL_HL+send_len)) {
+            return ret;
+        }
+        len -= sned_len;
+    }
+    return 0;
+}
